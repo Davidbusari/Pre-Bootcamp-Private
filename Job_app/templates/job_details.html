@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container-fluid pt-5 row">
+        <div class="col">
+            <h4>Hello {{thisUser.First_name}}</h4>
+        </div>
+        <div class="col col-lg-2">
+            <a class="btn btn-primary" href="/jobs">Dashboard</a>
+        </div>
+        <div class="col-md-auto">
+            <a href="/logout">logout</a>
+        </div>
+    
+    </div>
+    <div class="container p-5">
+        <h3>{{jobtodisplay.Title}}:</h3>
+        <div class="card w-75">
+            <div class="card-body">
+                <p class="card-title">Description :{{jobtodisplay.Description}}</p>
+                <p class="card-title">Location: {{jobtodisplay.Location}}</p>
+                <p class="card-title"> Posted By :{{jobtodisplay.Posted_by.First_name}}</p>
+                <p class="card-title"> Created At:{{jobtodisplay.created_at}}</p>
+                <p class="card-title">Updated At :{{jobtodisplay.updated_at}}</p>
+                <p class="card-title">Categories :{{jobtodisplay.Categories}}</p>
+            </div>
+        </div>
+        <div>
+            <a href="/addJob/{{jobtodisplay.id}}">Add To My Jobs</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

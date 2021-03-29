@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container-fluid pt-5 row">
+        <div class="col">
+            <h4>Hello {{thisUser.First_name}}</h4>
+        </div>
+        <div class="col-md-auto">
+            <a href="/logout">logout</a>
+        </div>
+        <div class="col col-lg-2">
+            <a class="btn btn-primary" href="/jobs/new">New Job!</a>
+        </div>
+    </div>
+    <div class="container p-5">
+        <h3>Everyone's Jobs:</h3>
+        <table>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+
+                        <th a scope="col">Job</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in otherjobs%}
+                    
+                    <tr>
+                        <td>{{job.Title}}</td>
+                        <td>{{job.Location}}</td>
+                        <td>
+                            <a href="job/details/{{job.id}}">View</a> |
+                    
+                            <!-- <a href="/cancelJob/{{job.id}}">Remove</a> |
+                            <a href="/editJob/{{job.id}}">Edit</a> -->
+                    
+                            {% if thisUser not in job.users_joined.all%}
+                            <a href="/addJob/{{job.id}}">Add</a>
+                            {%endif%}
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </table>
+        <table>
+            <h3>{{thisUser.First_name}}'s Jobs:</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+
+                        <th a scope="col">Job</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for job in thisUser.jobs_joined.all%}
+                    
+                    <tr>
+                        <td>{{job.Title}}</td>
+                        <td>{{job.Location}}</td>
+                        <td>
+                            <a href="job/details/{{job.id}}">View</a> |
+                            {% if thisUser in job.users_joined.all %}
+                            <a href="/doneJob/{{job.id}}">Give Up</a> |
+                            <a href="/cancelJob/{{job.id}}">Done</a> |
+                            
+
+                            <a href="/editJob/{{job.id}}">Edit</a>
+                            {% endif %}
+                            
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </table>
+    </div>
+
+</body>
+
+</html>
