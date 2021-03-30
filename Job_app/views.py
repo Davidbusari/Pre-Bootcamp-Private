@@ -42,7 +42,8 @@ def process_new_job(request):
         return redirect('/jobs/new')
 
     currentUser = User.objects.get(id=request.session['user_id'])
-    allcate = (request.POST['edu']), request.POST['avia'], request.POST['food'],  request.POST['other']
+    allcate = request.POST.getlist('cat')
+    # allcate = (request.POST['edu']), request.POST['avia'], request.POST['food'],  request.POST['other']
     new_job = Job.objects.create(
         Title = request.POST['title'],
         Description = request.POST['desc'],
